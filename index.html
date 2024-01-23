@@ -20,14 +20,17 @@
 
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V15:</p>
+    <p id="par">V16:</p>
     <div id="col"></div>
     <script>
+        let shouldBeep=false;
+
     document.getElementById("btn").addEventListener('click', (event) => {
             document.getElementById("col").classList.add('off');
         });
 
         document.getElementById("col").addEventListener('touchstart', (event) => {
+            shouldBeep=false;
             document.getElementById("col").classList.remove('off');
             document.getElementById("col").classList.add('on');
             event.preventDefault();
@@ -35,11 +38,19 @@
         });
 
         document.getElementById("col").addEventListener('touchend', (event) => {
+            shouldBeep=true;
+            beepBecauseOff();
             document.getElementById("col").classList.add('off');
             document.getElementById("col").classList.remove('on');
             window.removeEventListener('devicemotion', motionHandler);
         });
         
+        function beepBecauseOff(){
+            beep();
+            if(shouldBeep==true){
+                setTimeout(beepBecauseOff,300);
+            }
+        }
 
         function motionHandler(event) {
             // Get acceleration data
