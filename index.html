@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Manacle</title>
+    <title>Mini Manacle v2</title>
     <style>
         .off{
             height: 100vh;
@@ -23,9 +23,10 @@
     <div id="col"></div>
     <script>
         let shouldBeep=false;
+        const soundEffect=null;
 
     document.getElementById("btn").addEventListener('click', (event) => {
-            const soundEffect = new Audio();
+            soundEffect = new Audio();
             soundEffect.autoplay = true;
             soundEffect.src='data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123);
             shouldBeep=false
