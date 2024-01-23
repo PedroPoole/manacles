@@ -25,6 +25,9 @@
         let shouldBeep=false;
 
     document.getElementById("btn").addEventListener('click', (event) => {
+            const soundEffect = new Audio();
+            soundEffect.autoplay = true;
+            soundEffect.src='data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123);
             shouldBeep=false
             document.getElementById("col").classList.toggle('off');
         });
@@ -63,8 +66,7 @@
             }
         }
         function beep() {
-            var snd = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123));
-            snd.play();
+            soundEffect.play();
         }
     </script>
 </body>
