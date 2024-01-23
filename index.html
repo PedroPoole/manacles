@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="par">V:</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+    // Check for DeviceMotionEvent support
+    if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', motionHandler);
+    } else {
+        console.log("DeviceMotionEvent is not supported");
+    }
+});
+
+function motionHandler(event) {
+    // Get acceleration data
+    var acc = event.accelerationIncludingGravity;
+
+    // Determine if motion is enough to trigger sound
+    if (acc.x > threshold || acc.y > threshold || acc.z > threshold) {
+        document.getElementById("par").innerHTML=document.getElementById("par").innerHTML+"A";
+    }
+}
+    </script>
+</body>
+</html>
