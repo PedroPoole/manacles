@@ -9,14 +9,14 @@
 
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V11:</p>
+    <p id="par">V12:</p>
     <script>
         document.getElementById("btn").addEventListener('touchstart', (event) => {
             event.preventDefault;
             window.addEventListener('devicemotion', motionHandler);
         });
 
-        document.getElementById("btn").addEventListener('mousedown', (event) => {
+        document.getElementById("btn").addEventListener('touchend', (event) => {
             window.removeEventListener('devicemotion', motionHandler);
         });
         
