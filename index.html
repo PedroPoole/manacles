@@ -28,6 +28,9 @@
         let motionListenerAdded = false;
 
         document.getElementById("btn").addEventListener('click', () => {
+            
+            shouldBeep = !shouldBeep;
+            
             document.getElementById("col").classList.toggle('off');
         });
 
