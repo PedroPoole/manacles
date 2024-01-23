@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V9:</p>
+    <p id="par">V10:</p>
     <script>
-if (window.DeviceMotionEvent == undefined) {
-        //No accelerometer is present. Use buttons. 
-        alert("no accelerometer");
-    }
-    
-        document.getElementById("btn").addEventListener('click', (event) => {
-    // Check for DeviceMotionEvent support
-    if (window.DeviceMotionEvent) {
-        window.addEventListener('devicemotion', motionHandler);
-    } else {
-        console.log("DeviceMotionEvent is not supported");
-    }
-});
+        document.getElementById("btn").addEventListener('mousedown', (event) => {
+            window.addEventListener('devicemotion', motionHandler);
+        });
 
-function motionHandler(event) {
-    // Get acceleration data
-    let threshold=1;
-    var acc = event.acceleration;
+        document.getElementById("btn").addEventListener('mousedown', (event) => {
+            window.removeEventListener('devicemotion', motionHandler);
+        });
+        
 
-    // Determine if motion is enough to trigger sound
-    if (acc.x > threshold || acc.y > threshold || acc.z > threshold) {
-        beep();
-        document.getElementById("par").innerHTML=document.getElementById("par").innerHTML+"A";
-    }
-}
-function beep() {
-    var snd = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'+Array(1e3).join(123));  
-    snd.play();
-}
+        function motionHandler(event) {
+            // Get acceleration data
+            let threshold = 1;
+            var acc = event.acceleration;
+
+            // Determine if motion is enough to trigger sound
+            if (acc.x > threshold || acc.y > threshold || acc.z > threshold) {
+                beep();
+                document.getElementById("par").innerHTML = document.getElementById("par").innerHTML + "A";
+            }
+        }
+        function beep() {
+            var snd = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123));
+            snd.play();
+        }
     </script>
 </body>
+
 </html>
