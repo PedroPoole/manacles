@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mini Manacle</title>
     <style>
         .off{
             height: 100vh;
@@ -19,8 +19,7 @@
 </head>
 
 <body>
-    <button id="btn">Empezar</button>
-    <p id="par">V17:</p>
+    <button id="btn">Start/Stop</button>
     <div id="col"></div>
     <script>
         let shouldBeep=false;
@@ -61,7 +60,6 @@
             // Determine if motion is enough to trigger sound
             if (acc.x > threshold || acc.y > threshold || acc.z > threshold) {
                 beep();
-                document.getElementById("par").innerHTML = document.getElementById("par").innerHTML + "A";
             }
         }
         function beep() {
