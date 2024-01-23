@@ -10,12 +10,17 @@
             height: 100vh;
             background-color: red;
         }
+
+        .on{
+            height: 100vh;
+            background-color: green;
+        }
     </style>
 </head>
 
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V14:</p>
+    <p id="par">V15:</p>
     <div id="col"></div>
     <script>
     document.getElementById("btn").addEventListener('click', (event) => {
@@ -23,11 +28,15 @@
         });
 
         document.getElementById("col").addEventListener('touchstart', (event) => {
+            document.getElementById("col").classList.remove('off');
+            document.getElementById("col").classList.add('on');
             event.preventDefault();
             window.addEventListener('devicemotion', motionHandler);
         });
 
         document.getElementById("col").addEventListener('touchend', (event) => {
+            document.getElementById("col").classList.add('off');
+            document.getElementById("col").classList.remove('on');
             window.removeEventListener('devicemotion', motionHandler);
         });
         
