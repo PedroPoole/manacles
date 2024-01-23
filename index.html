@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p id="par">V5:</p>
+    <p id="par">V6:</p>
     <script>
 if (window.DeviceMotionEvent == undefined) {
         //No accelerometer is present. Use buttons. 
@@ -24,7 +24,7 @@ if (window.DeviceMotionEvent == undefined) {
 
 function motionHandler(event) {
     // Get acceleration data
-    let threshold=2;
+    let threshold=1;
     var acc = event.acceleration;
 
     // Determine if motion is enough to trigger sound
