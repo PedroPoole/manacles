@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Manacle v2</title>
+    <title>Mini Manacle v3</title>
     <style>
         .off{
             height: 100vh;
@@ -22,51 +22,85 @@
     <button id="btn">Start/Stop</button>
     <div id="col"></div>
     <script>
-        let shouldBeep=false;
-        let soundEffect=null;
+        let shouldBeep = false;
+        let soundEffect = null;
+        let audioContext = null;
+        let motionListenerAdded = false;
 
-    document.getElementById("btn").addEventListener('click', (event) => {
-            soundEffect = new Audio();
-            soundEffect.src='data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123);
-            shouldBeep=false
+        document.getElementById("btn").addEventListener('click', () => {
+            if (!soundEffect) {
+                soundEffect = new Audio();
+                soundEffect.src = 'data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123);
+            }
+            shouldBeep = !shouldBeep;
+            if (shouldBeep) {
+                soundEffect.play();
+            } else {
+                soundEffect.pause();
+                soundEffect.currentTime = 0;
+            }
             document.getElementById("col").classList.toggle('off');
         });
 
         document.getElementById("col").addEventListener('touchstart', (event) => {
-            shouldBeep=false;
+            shouldBeep = false;
             document.getElementById("col").classList.remove('off');
             document.getElementById("col").classList.add('on');
             event.preventDefault();
-            window.addEventListener('devicemotion', motionHandler);
+            if (!motionListenerAdded) {
+                initMotionListener();
+                motionListenerAdded = true;
+            }
         });
 
         document.getElementById("col").addEventListener('touchend', (event) => {
-            shouldBeep=true;
+            shouldBeep = true;
             beepBecauseOff();
             document.getElementById("col").classList.add('off');
             document.getElementById("col").classList.remove('on');
-            window.removeEventListener('devicemotion', motionHandler);
         });
-        
-        function beepBecauseOff(){
+
+        function beepBecauseOff() {
             beep();
-            if(shouldBeep==true){
-                setTimeout(beepBecauseOff,300);
+            if (shouldBeep == true) {
+                setTimeout(beepBecauseOff, 300);
             }
         }
 
+        function initMotionListener() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            window.addEventListener('devicemotion', motionHandler);
+        }
+
         function motionHandler(event) {
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
             // Get acceleration data
             let threshold = 0.5;
-            var acc = event.acceleration;
+            let acc = event.acceleration;
 
             // Determine if motion is enough to trigger sound
             if (acc.x > threshold || acc.y > threshold || acc.z > threshold) {
                 beep();
             }
         }
+
         function beep() {
-            soundEffect.play();
+            if (audioContext && audioContext.state === 'running') {
+                let oscillator = audioContext.createOscillator();
+                oscillator.connect(audioContext.destination);
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // Adjust the frequency as needed
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.1); // Adjust the duration as needed
+            } else {
+                soundEffect.play();
+            }
         }
     </script>
 </body>
