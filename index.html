@@ -20,13 +20,14 @@
 
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V16:</p>
+    <p id="par">V17:</p>
     <div id="col"></div>
     <script>
         let shouldBeep=false;
 
     document.getElementById("btn").addEventListener('click', (event) => {
-            document.getElementById("col").classList.add('off');
+            shouldBeep=false
+            document.getElementById("col").classList.toggle('off');
         });
 
         document.getElementById("col").addEventListener('touchstart', (event) => {
