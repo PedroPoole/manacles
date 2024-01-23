@@ -24,7 +24,7 @@ if (window.DeviceMotionEvent == undefined) {
 
 function motionHandler(event) {
     // Get acceleration data
-    let threshold=0.5;
+    let threshold=2;
     var acc = event.accelerationIncludingGravity;
 
     // Determine if motion is enough to trigger sound
