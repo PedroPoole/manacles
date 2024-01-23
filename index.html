@@ -8,6 +8,11 @@
 <body>
     <p id="par">V:</p>
     <script>
+if (window.DeviceMotionEvent == undefined) {
+        //No accelerometer is present. Use buttons. 
+        alert("no accelerometer");
+    }
+    
         document.addEventListener('DOMContentLoaded', (event) => {
     // Check for DeviceMotionEvent support
     if (window.DeviceMotionEvent) {
@@ -19,6 +24,7 @@
 
 function motionHandler(event) {
     // Get acceleration data
+    let threshold=0.5;
     var acc = event.accelerationIncludingGravity;
 
     // Determine if motion is enough to trigger sound
