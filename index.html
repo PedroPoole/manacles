@@ -57,6 +57,7 @@
             shouldBeep = true;
             beepBecauseOff();
             window.removeEventListener('devicemotion', motionHandler);
+            motionListenerAdded = false;
             document.getElementById("col").classList.add('off');
             document.getElementById("col").classList.remove('on');
 
