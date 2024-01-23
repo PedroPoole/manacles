@@ -56,8 +56,10 @@
         document.getElementById("col").addEventListener('touchend', (event) => {
             shouldBeep = true;
             beepBecauseOff();
+            window.removeEventListener('devicemotion', motionHandler);
             document.getElementById("col").classList.add('off');
             document.getElementById("col").classList.remove('on');
+
         });
 
         function beepBecauseOff() {
