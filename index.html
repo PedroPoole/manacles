@@ -5,18 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .off{
+            height: 100vh;
+            background-color: red;
+        }
+    </style>
 </head>
 
 <body>
     <button id="btn">Empezar</button>
-    <p id="par">V13:</p>
+    <p id="par">V14:</p>
+    <div id="col"></div>
     <script>
-        document.getElementById("btn").addEventListener('touchstart', (event) => {
+    document.getElementById("btn").addEventListener('click', (event) => {
+            document.getElementById("col").classList.add('off');
+        });
+
+        document.getElementById("col").addEventListener('touchstart', (event) => {
             event.preventDefault();
             window.addEventListener('devicemotion', motionHandler);
         });
 
-        document.getElementById("btn").addEventListener('touchend', (event) => {
+        document.getElementById("col").addEventListener('touchend', (event) => {
             window.removeEventListener('devicemotion', motionHandler);
         });
         
