@@ -23,11 +23,10 @@
     <div id="col"></div>
     <script>
         let shouldBeep=false;
-        const soundEffect=null;
+        let soundEffect=null;
 
     document.getElementById("btn").addEventListener('click', (event) => {
             soundEffect = new Audio();
-            soundEffect.autoplay = true;
             soundEffect.src='data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU' + Array(1e3).join(123);
             shouldBeep=false
             document.getElementById("col").classList.toggle('off');
