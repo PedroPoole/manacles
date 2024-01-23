@@ -97,7 +97,7 @@
                 let oscillator = audioContext.createOscillator();
                 oscillator.connect(audioContext.destination);
                 oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(700, audioContext.currentTime); // Adjust the frequency as needed
+                oscillator.frequency.setValueAtTime(1500, audioContext.currentTime); // Adjust the frequency as needed
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.1); // Adjust the duration as needed
             } else {
